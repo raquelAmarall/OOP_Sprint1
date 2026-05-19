@@ -1,0 +1,19 @@
+# Eclipse
+.metadata/
+bin/
+.settings/
+.project
+.classpath
+
+# Java
+*.class
+
+# Logs
+*.log
+
+# Sistema
+Thumbs.db
+
+# Build
+target/
+build/
