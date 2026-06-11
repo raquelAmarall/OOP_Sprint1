@@ -19,15 +19,16 @@ public class TrechoRodovia {
 	public double getQuilometroInicial() {
 		return quilometroInicial;
 	}
-	private void setQuilometroInicial(double quilometroInicial) {
+	public void setQuilometroInicial(double quilometroInicial) {
 		this.quilometroInicial = quilometroInicial;
 	}
 	public double getQuilometroFinal() {
 		return quilometroFinal;
 	}
-	private void setQuilometroFinal(double quilometroFinal) {
+	public void setQuilometroFinal(double quilometroFinal) {
 		if (quilometroFinal < this.getQuilometroInicial()) {
-			System.out.println("Quilômetro final está menor que o quilômetro inicial");
+			System.out.println("Quilômetro final está menor que o quilômetro inicial. Valor ajustado para ser o mesmo informado no Quilômetro Inicial;");
+			this.quilometroFinal = this.getQuilometroInicial();
 		}else {
 			this.quilometroFinal = quilometroFinal;
 		}
@@ -35,9 +36,10 @@ public class TrechoRodovia {
 	public double getNivelVegetacao() {
 		return nivelVegetacao;
 	}
-	private void setNivelVegetacao(double nivelVegetacao) {
+	public void setNivelVegetacao(double nivelVegetacao) {
 		if (nivelVegetacao < 0) {
-			System.out.println("O nivel de vegetação não pode ser negativo");			
+			System.out.println("O nivel de vegetação não pode ser negativo. Valor definido como 0.");		
+			this.nivelVegetacao = 0;
 		} else {
 			this.nivelVegetacao = nivelVegetacao;
 		}	
@@ -45,9 +47,10 @@ public class TrechoRodovia {
 	public String getNome() {
 		return nome;
 	}
-	private void setNome(String nome) {
-		if (nome.isBlank()) {
-			System.out.println("Nome não informado, por favor informe o nome");			
+	public void setNome(String nome) {
+		if (nome == null) {
+			System.out.println("Nome não informado.");		
+			this.nome = "Nome não informado";
 		} else {
 			this.nome = nome;
 		}	
