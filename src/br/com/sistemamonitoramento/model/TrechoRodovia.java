@@ -1,18 +1,22 @@
 package br.com.sistemamonitoramento.model;
 
-public class TrechoRodovia {
+public class TrechoRodovia implements MonitoravelViaIoT{
 	// Criando as propriedades
 	private double quilometroInicial;
 	private double quilometroFinal;
 	private double nivelVegetacao;
 	private String nome;
+	private boolean umido;
+	private boolean monitorado;
 	
 	// Construtor
-	public TrechoRodovia(double quilometroInicial, double quilometroFinal, double nivelVegetacao, String nome) {
+	public TrechoRodovia(double quilometroInicial, double quilometroFinal, double nivelVegetacao, String nome, boolean umido, boolean monitorado) {
 		this.setNivelVegetacao(nivelVegetacao);
 		this.setQuilometroInicial(quilometroInicial);
 		this.setQuilometroFinal(quilometroFinal);	
 		this.setNome(nome);
+		this.umido = umido;
+		this.monitorado = monitorado;
 	}
 	
 	// Getters and Setters
@@ -56,16 +60,38 @@ public class TrechoRodovia {
 		}	
 	}
 	
+	public boolean getUmido() {
+		return umido;
+	}
+	
+	public boolean getMonitorado() {
+		return monitorado;
+	}
+	
+	
 	// Métodos
 	public void registrarCrescimento(double taxa) {
 		double crescimento = this.getNivelVegetacao();
 		if (taxa > 0) {
-			crescimento += taxa;
+			if(this.umido) {
+				crescimento += taxa * 2;
+			} else {
+				crescimento += taxa;
+			}
 		}else {
 			System.out.println("A taxa de crescimento tem que ser maior que 0");
 		}
 		this.setNivelVegetacao(crescimento);
 	}
 	
+	@Override
+	public String transmitirDadosSensor() {
+		String mensagem = "No trecho: " + this.getNome() + " o nível da vegetação é de: " + this.getNivelVegetacao();
+		if(this.monitorado) {
+			return mensagem;
+		} else {
+			return "Trecho " + this.getNome() + " não tem tecnologia de monitoramento";
+		}
+	}
 
 }
