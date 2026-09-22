@@ -6,6 +6,7 @@ public class RocadaMecanizada extends IntervencaoOperacional{
 	@Override
 	public double executarServico(double tamanhoVegetacao) {
 		return tamanhoVegetacao  = 0;	
+		// Aguardando definição da regra esperada pelo professor
 	}
 	
 	
